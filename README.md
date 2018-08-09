@@ -1,11 +1,38 @@
 # SensApp::Receiver
 
+This the front-end service that sensors hit when they post data to
+SensApp. It is ia REST service that offers, the follwing endpoints:
 
-This the front-end service that sensor hit when the post data to SensApp. Its ia NodeJS service.
+ * POST at `/sensapp/:sensor-id`. Accept the data collected by the
+   sensors in JSON document.
 
-# Installation
+ * GET at `/sensapp/about` returns some general informations about the
+   service. Useful to quickly test that the service is up and running.
 
-This is a NodeJS application that can be started by entering:
+
+# Build, Test and Installation
+
+Receiver is a NodeJS application, so the requirements are NodeJS and
+Git. Here is the installation procedure.
+
+ 1. Fetch the sources from the git repository:
+
+    $> git clone https://github.com/fchauvel/receiver.git
+
+ 2. Install the application from the sources:
+
+    $> cd receiver
+    $> npm install
+
+ 3. Run the test suite:
+
+    $> node app/server &
+    $> npm test
+    $> kill $!
+
+# Start-up
+
+This is a NodeJS application that starts with:
 
      $> node app/server
      SensApp.Receiver v0.0.0
@@ -16,5 +43,4 @@ This is a NodeJS application that can be started by entering:
 The port listen to can be specified using the `-p` option as follows:
 
     $> node app/server -p 8078
-
 
