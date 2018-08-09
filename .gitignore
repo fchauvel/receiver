@@ -1,0 +1,9 @@
+# Emacs files
+*~
+\#*\#
+
+# Miscellaneous
+*.log
+
+# NPM & Javascripts
+node_modules/
