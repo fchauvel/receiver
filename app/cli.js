@@ -15,59 +15,67 @@ format = function (template, context) {
 };
 
 
-function CLI(output, credits) {
+const OPENING = "\`${name} v${version}\`";
+const COPYRIGHT = "\`Copyright (C) ${owner} -- ${year}\`";
+const ENDPOINT = "\`Listening on ${host}:${port} ...\`";
 
-    this.OPENING = "\`${name} v${version}\`"
-    this.COPYRIGHT = "\`Copyright (C) ${owner} -- ${year}\`";
-    this.ENDPOINT = "\`Listening on ${host}:${port} ...\`";
 
-    this.showCopyright = function() {
-	var data = { owner: credits.copyrightOwner(),
-		     year: credits.copyrightYear() };
-	var text = format(this.COPYRIGHT, data);
-
-	output.log(text);
-    };
-
-    this.showEndpoint = function(host, port) {
-	output.log(format(this.ENDPOINT,
-			  {host: host, port: port }));
-    };
-
-    this.showOpening = function() {
-	output.log(format(this.OPENING,
-			  { name: credits.applicationName(),
-			    version: credits.version() }));
-    };
-
-    this.showHorizontalLine = function () {
-	output.log("------");
-    };
+class  CLI {
     
-};
+    constructor(output, credits) {
+	this.output = output;
+	this.credits = credits;
+    }
 
+    showCopyright() {
+	var data = { owner: this.credits.copyrightOwner(),
+		     year: this.credits.copyrightYear() };
+	var text = format(COPYRIGHT, data);
 
-function Credits() {
+	this.output.log(text);
+    }
 
-    var data = require("../package.json");
+    showEndpoint(host, port) {
+	this.output.log(format(ENDPOINT,
+			       {host: host, port: port }));
+    }
 
-    this.version = function () {
-	return data.version;
-    };
+    showOpening () {
+	this.output.log(format(OPENING,
+			       { name: this.credits.applicationName(),
+				 version: this.credits.version() }));
+    }
 
-    this.copyrightYear = function () {
-	return "2018";
-    };
-
-    this.copyrightOwner = function () {
-	return "SINTEF";
-    };
-
-    this.applicationName = function() {
-	return data.name;
+    showHorizontalLine () {
+	this.output.log("------");
     }
     
-};
+}
+
+
+class Credits {
+
+    constructor() {
+	this._data = require("../package.json");
+    }
+
+    version() {
+	return this._data.version;
+    }
+
+    copyrightYear () {
+	return "2018";
+    }
+
+    copyrightOwner () {
+	return "SINTEF";
+    }
+
+    applicationName () {
+	return this._data.name;
+    }
+    
+}
 
 
 
