@@ -26,7 +26,7 @@ Git. Here is the installation procedure.
 
  3. Run the test suite:
 
-    $> node app/server &
+    $> node app/start &
     $> npm test
     $> kill $!
 
@@ -34,7 +34,7 @@ Git. Here is the installation procedure.
 
 This is a NodeJS application that starts with:
 
-     $> node app/server
+     $> node app/start
      SensApp.Receiver v0.0.0
      Copyright (C) SINTEF -- 2018
      ------
@@ -42,5 +42,5 @@ This is a NodeJS application that starts with:
 
 The port listen to can be specified using the `-p` option as follows:
 
-    $> node app/server -p 8078
+    $> node app/start -p 8078
 

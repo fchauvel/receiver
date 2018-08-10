@@ -13,4 +13,5 @@ RUN apt-get -qq -y install nodejs
 RUN git clone https://github.com/fchauvel/receiver.git
 WORKDIR receiver
 RUN npm install
-CMD node app/server -p 3000
+
+CMD node app/start -p 3000
