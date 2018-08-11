@@ -52,9 +52,10 @@ A couple of options can be set through the command line as follows:
 
 	Options:
 
-	  -V, --version     output the version number
-      -p, --port [int]  Set the port on which Receiver listens (default: 3000)
-      -h, --help        output usage information
+	  -V, --version           output the version number
+      -p, --port [int]        Set the port on which Receiver listens (default: 3000)
+	  -q, --task-queue [url]  Set the URL of the task queue (default: amqp://task-queue:5672)
+      -h, --help              output usage information
 
 franck@debian:~/Documents/mssep/receiver$ 
 

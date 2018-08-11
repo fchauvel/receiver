@@ -9,11 +9,9 @@
  *
  */
 
-var expect  = require("chai").expect;    
-var CLI = require("../app/cli").CLI;
-var Credits = require("../app/cli").Credits
-
-const VERSION = require("../package.json").version
+const expect  = require("chai").expect;    
+const CLI = require("../app/cli").CLI;
+const Credits = require("../app/cli").Credits
 
 
 var FakeConsole = function() {
@@ -35,23 +33,46 @@ describe("The CLI", function(){
 
     describe("When parsing arguments", () => {
 	
-	it("should parse the --port argument", function () {
-	    options = cli.parse(["node", "app/start", "--port", "8000"]);
+	it("should parse the --port argument", () => {
+	    var port = "8000"
+	    var options = cli.parse(["node", "app/start", "--port", port]);
 	    
-	    expect(options.port).to.equal(8000);
+	    expect(options.port).to.equal(parseInt(port));
 	});
 
-	it("should parse the -p argument", function () {
-	    options = cli.parse(["node", "app/start", "-p", "8000"]);
+	it("should parse the -p argument", () => {
+	    var port = "8000"
+	    var options = cli.parse(["node", "app/start", "-p", port]);
 	    
-	    expect(options.port).to.equal(8000);
+	    expect(options.port).to.equal(parseInt(port));
 	});
 	
-	it("should have 3000 as default port value", function () {
+	it("should have 3000 as default port value", () => {
 	    options = cli.parse(["node", "app/start"]);
 	    
 	    expect(options.port).to.equal(3000);
 	});
+
+	it("should parse the --task-queue argument", () => {
+	    var queue = "localhost:8989";
+	    var options = cli.parse(["node", "app/start", "--task-queue", queue]);
+	    
+	    expect(options.taskQueue).to.equal(queue);
+	});
+
+	it("should parse the -q", () => {
+	    var queue = "localhost:8989";
+	    var options = cli.parse(["node", "app/start", "-q", queue]);
+	    
+	    expect(options.taskQueue).to.equal(queue);
+	});
+
+	it("should have 'amqp://queue:5672' as default queue server", () => {
+	    var options = cli.parse(["node", "app/start"]);
+	    
+	    expect(options.taskQueue).to.equal("amqp://task-queue:5672");
+	});
+
 
     });
 

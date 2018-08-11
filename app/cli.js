@@ -44,6 +44,7 @@ class  CLI {
 	    .version(this.credits.version())
 	    .description("REST end-point where sensors can push data")
 	    .option("-p, --port [int]", "Set the port on which Receiver listens", myParseInt, 3000)
+	    .option("-q, --task-queue [url]", "Set the URL of the task queue", "amqp://task-queue:5672") 
 	    .parse(commandLine);
 	return this.program;
     }
