@@ -1,19 +1,25 @@
 {
-  "name": "SensApp.Receiver",
-  "version": "0.0.0",
-  "description": "Receive data from sensors",
-  "main": "receiver.js",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
-  },
-  "author": "Franck Chauvel",
-  "license": "MIT",
-  "dependencies": {
-    "chai": "^4.1.2",
-    "command-line-args": "^5.0.2",
-    "express": "^4.16.3",
-    "mocha": "^5.2.0",
-    "request": "^2.87.0",
-    "winston": "^3.0.0"
-  }
+   "name": "SensApp.Receiver",
+   "version": "0.0.0",
+   "description": "Receive data from sensors",
+   "main": "start.js",
+   "scripts": {
+      "test": "./node_modules/.bin/mocha --reporter spec"
+   },
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/fchauvel/receiver.git"
+   },
+   "author": "Franck Chauvel",
+   "license": "MIT",
+   "dependencies": {
+      "amqplib": "^0.5.2",
+      "commander": "^2.17.1",
+      "express": "^4.16.3",
+      "request": "^2.87.0"
+   },
+   "devDependencies": {
+      "chai": "^4.1.2",
+      "mocha": "^5.2.0"
+   }
 }

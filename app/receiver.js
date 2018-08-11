@@ -20,7 +20,6 @@ class Receiver {
     constructor () {
 	this.credits = new Credits();
 	this.cli = new CLI(console, this.credits);
-
 	this.app = express();
 
 	this.app.post("/sensapp/:sensorId", function(request, response) {
@@ -45,14 +44,16 @@ class Receiver {
 	});
     }
 
-    listenOn (port) {
+    listen () {
+	var options = this.cli.parse(process.argv);
+	
 	this.cli.showOpening();
 	this.cli.showCopyright();
 	this.cli.showHorizontalLine();
 	
-	this.app.listen(port);
+	this.app.listen(options.port);
 
-	this.cli.showEndpoint("localhost", port);
+	this.cli.showEndpoint("localhost", options.port);
     }
 
 };

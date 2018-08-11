@@ -9,21 +9,10 @@
  *
  */
 
-const options = [
-    { name: "version", alias: 'v', type: Boolean },
-    { name: "port", alias: "p", type: Number, defaultValue: 3000},
-    { name: "host", alias: "h", type: String, defaultValue: "localhost" }
-];
-
-const commandLineArgs = require('command-line-args');
-const commandLine = commandLineArgs(options);
-
-
-
 const Receiver = require("./receiver")
 
-var receiver = new Receiver(commandLine.port)
-receiver.listenOn(commandLine.port)
+var receiver = new Receiver()
+receiver.listen()
 
 
 

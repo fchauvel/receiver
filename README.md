@@ -39,8 +39,22 @@ This is a NodeJS application that starts with:
      Copyright (C) SINTEF -- 2018
      ------
      Listening on localhost:3000 ...
+	 
+## Options
 
-The port listen to can be specified using the `-p` option as follows:
+A couple of options can be set through the command line as follows:
 
-    $> node app/start -p 8078
+	$ node app/start --help
+	
+	Usage: start [options]
+
+	REST end-point where sensors can push data
+
+	Options:
+
+	  -V, --version     output the version number
+      -p, --port [int]  Set the port on which Receiver listens (default: 3000)
+      -h, --help        output usage information
+
+franck@debian:~/Documents/mssep/receiver$ 
 

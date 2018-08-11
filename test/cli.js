@@ -33,6 +33,28 @@ describe("The CLI", function(){
     var output = new FakeConsole();
     var cli = new CLI(output, credits);
 
+    describe("When parsing arguments", () => {
+	
+	it("should parse the --port argument", function () {
+	    options = cli.parse(["node", "app/start", "--port", "8000"]);
+	    
+	    expect(options.port).to.equal(8000);
+	});
+
+	it("should parse the -p argument", function () {
+	    options = cli.parse(["node", "app/start", "-p", "8000"]);
+	    
+	    expect(options.port).to.equal(8000);
+	});
+	
+	it("should have 3000 as default port value", function () {
+	    options = cli.parse(["node", "app/start"]);
+	    
+	    expect(options.port).to.equal(3000);
+	});
+
+    });
+
 
     it("should display the name and version number as welcoming opening", function(){
 	cli.showOpening();

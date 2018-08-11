@@ -15,6 +15,16 @@ format = function (template, context) {
 };
 
 
+function myParseInt(string, defaultValue) {
+  var int = parseInt(string, 10);
+
+  if (typeof int == 'number') {
+    return int;
+  } else {
+    return defaultValue;
+  }
+}
+
 const OPENING = "\`${name} v${version}\`";
 const COPYRIGHT = "\`Copyright (C) ${owner} -- ${year}\`";
 const ENDPOINT = "\`Listening on ${host}:${port} ...\`";
@@ -23,8 +33,19 @@ const ENDPOINT = "\`Listening on ${host}:${port} ...\`";
 class  CLI {
     
     constructor(output, credits) {
+	this.program = require("commander");
 	this.output = output;
 	this.credits = credits;
+    }
+
+
+    parse (commandLine) {
+	this.program
+	    .version(this.credits.version())
+	    .description("REST end-point where sensors can push data")
+	    .option("-p, --port [int]", "Set the port on which Receiver listens", myParseInt, 3000)
+	    .parse(commandLine);
+	return this.program;
     }
 
     showCopyright() {
