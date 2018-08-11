@@ -17,18 +17,18 @@ Git. Here is the installation procedure.
 
  1. Fetch the sources from the git repository:
 
-    $> git clone https://github.com/fchauvel/receiver.git
+		$> git clone https://github.com/fchauvel/receiver.git
 
  2. Install the application from the sources:
 
-    $> cd receiver
-    $> npm install
+		$> cd receiver
+		$> npm install
 
  3. Run the test suite:
 
-    $> node app/start &
-    $> npm test
-    $> kill $!
+		$> node app/start &
+		$> npm test
+		$> kill $!
 
 # Start-up
 
