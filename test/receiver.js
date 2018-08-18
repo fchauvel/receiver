@@ -9,50 +9,67 @@
  *
  */
 
-var expect  = require("chai").expect;
-var request = require("request");
+
+const chai  = require("chai");
+const chaiHttp = require("chai-http");
+const should = chai.should();
+
+chai.use(chaiHttp);
+
+var UI = require("../app/ui")
+var Settings = require("../app/settings")
+var Receiver = require("../app/receiver")
 
 
-describe("Receiver API", function() {
+class FakeMessageQueue {
+
+    publish(data) {}
+
+}
+
+
+describe("Receiver", function() {
+
+    var receiver = new Receiver(
+	Settings.defaults(),
+	new UI(console),
+	new FakeMessageQueue());
     
-    var body = {
-	"sensor": "my-sensor-unique-ID",
-	"time": "now",
-	"data": "50"
-    };
 
-    it("returns 404 for any URL other than /sensapp", function() {
-	var options = {
-	    "url": "http://localhost:3000/somewhere",
-	    "method": "POST"
-	};
-
-	request(options, function(error, response, body) {
-	    expect(response.statusCode).to.equal(404);
-	});
+    it("should accepts sensor data on POST /sensapp/my-sensor", (done) => {
+	chai.request(receiver.app)
+	    .post('/sensapp/my-sensor')
+	    .send({
+		"sensor": "my-sensor", 
+		"data": "my-json-data"
+	    })
+	    .end( (error, response) => {
+		should.not.exist(error);
+		response.should.have.status(200);
+		response.type.should.equal('application/json');
+		response.body.should.be.a('object');
+		response.body.should.have.property('comment');
+		response.body.should.have.property('url');
+		done();
+	    });
     });
 
-    it("returns 200 for /sensapp/my-sensor", function() {
-	var options = {
-	    "url": "http://localhost:3000/sensapp/my-sensor",
-	    "method": "POST"
-	};
-
-	request(options, function(error, response, body) {
-	    expect(response.statusCode).to.equal(200);
-	});
-    });
-
-    it("returns 200 for /about", function() {
-	var options = {
-	    "url": "http://localhost:3000/sensapp/about",
-	    "method": "POST"
-	};
-
-	request(options, function(error, response, body) {
-	    expect(response.statusCode).to.equal(200);
-	    expect(body).to.have.string("SINTEF");
-	});
-    });
     
+    it("should return infos on GET /sensapp/about", (done) => {
+	chai.request(receiver.app)
+	    .get('/sensapp/about')
+	    .end( (error, response) => {
+		should.not.exist(error);
+		response.should.have.status(200);
+		response.type.should.equal('application/json');
+		response.body.should.be.a('object');
+		response.body.should.have.property('version');
+		response.body.should.have.property('license');
+		response.body.should.have.property('programName');
+		response.body.should.have.property('copyright');
+		done();
+	    });	
+    });
+
+
 });

@@ -10,50 +10,44 @@
  */
 
 
-var express = require("express");
-var Credits = require("./cli").Credits;
-var CLI = require("./cli").CLI;
+const express = require("express");
+
 
 
 class Receiver {
 
-    constructor () {
-	this.credits = new Credits();
-	this.cli = new CLI(console, this.credits);
+    constructor (settings, ui, messageQueue) {
+	this.settings = settings;
+	this.ui = ui;
+	this.messageQueue = messageQueue;
 	this.app = express();
-
-	this.app.post("/sensapp/:sensorId", function(request, response) {
-	    var knownSensors = ["my-sensor"]
+	
+	this.app.post("/sensapp/:sensorId", (request, response) => {
 	    var sensorId = request.params.sensorId
-	    
-	    if (knownSensors.indexOf(sensorId) > -1) {
-		response.send("That's all folks");
-		
-	    } else {
-		response.statusCode = 400;
-		response.send("Unknown sensor!");
-	    }
-	    
+
+	    this.messageQueue.publish(request.body);
+
+	    response.set("Content-Type", "application/json");
+	    response.send(JSON.stringify(
+		{"comment": "Data will be soon available ",
+		 "url": `/sensapp/#{sensorId}`} ));
 	});
 
-	this.app.get("/sensapp/about", function(request, response) {
-	    var text = credits.applicationName() + " -- " + credits.version() + "\r\n" 
-		+ "Copyright (C) " + credits.copyrightOwner() + ", " + credits.copyrightYear();
-	    
-	    response.send(text);
+	this.app.get("/sensapp/about", (request, response) => {
+	    const About = require("./about");
+	    const infos = About.fromPackageJson();
+
+	    response.set("Content-Type", "application/json");
+	    response.send(JSON.stringify(infos));
 	});
     }
+    
 
     listen () {
-	var options = this.cli.parse(process.argv);
+	this.ui.showOpening();
+	this.ui.showCopyright();
 	
-	this.cli.showOpening();
-	this.cli.showCopyright();
-	this.cli.showHorizontalLine();
-	
-	this.app.listen(options.port);
-
-	this.cli.showEndpoint("localhost", options.port);
+	this.app.listen(3000);
     }
 
 };
