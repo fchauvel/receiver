@@ -11,7 +11,7 @@
 
 
 const express = require("express");
-
+const bodyParser = require("body-parser");
 
 
 class Receiver {
@@ -20,11 +20,16 @@ class Receiver {
 	this.settings = settings;
 	this.ui = ui;
 	this.messageQueue = messageQueue;
+
 	this.app = express();
+
+	this.app.use(bodyParser.urlencoded({ extended: false }));
+	this.app.use(bodyParser.json());
 	
 	this.app.post("/sensapp/:sensorId", (request, response) => {
 	    var sensorId = request.params.sensorId
 
+	    console.log("Received: ", request.body);
 	    this.messageQueue.publish(request.body);
 
 	    response.set("Content-Type", "application/json");

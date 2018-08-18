@@ -18,6 +18,7 @@ const UI = require("./ui");
 var about = About.fromPackageJson();
 var settings = Settings.fromCommandLine(process.argv);
 
+console.log(settings)
 
 var messageQueue = new RabbitMQ(settings.queueHost,
 				settings.queuePort,

@@ -16,17 +16,20 @@ const amqp = require('amqplib/callback_api');
 class RabbitMQ {
 
     constructor (queueHost, queuePort, queueName) {
-	this.queueURL = "amqp://" + queueHost + ":" + queuePort.toString();
+	// this.queueURL = "amqp://" + queueHost + ":" + queuePort.toString();
+	this.queueURL = "amqp://localhost"
 	this.queueName = queueName;
     }
 
     publish (data) {
-	const queueURL = 
-	
-	amqp.connect(queueURL, function (err, connection) {
+	var self = this;
+	amqp.connect(this.queueURL, function (err, connection) {
 	    connection.createChannel(function(err, channel) {
-		channel.assertQueue(this.queueName, {durable: true});
-		channel.sendToQueue(this.queueName, Buffer.from(data), {persistent: true});
+		console.log(err);
+		console.log(data);
+		console.log("queue name: ", self.queueName);
+		channel.assertQueue(self.queueName, {durable: true});
+		channel.sendToQueue(self.queueName, Buffer.from(data), {persistent: true});
 	    });
 	    console.log(" [x] Sent '%s'", data);
 	});

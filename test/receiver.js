@@ -39,10 +39,10 @@ describe("Receiver", function() {
     it("should accepts sensor data on POST /sensapp/my-sensor", (done) => {
 	chai.request(receiver.app)
 	    .post('/sensapp/my-sensor')
-	    .send({
+	    .send([{
 		"sensor": "my-sensor", 
 		"data": "my-json-data"
-	    })
+	    }])
 	    .end( (error, response) => {
 		should.not.exist(error);
 		response.should.have.status(200);
