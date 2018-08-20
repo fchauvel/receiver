@@ -20,6 +20,7 @@ class RabbitMQ {
 	this.queueName = queueName;
     }
 
+    
     publish (data) {
 	console.log("Connecting to " + this.queueURL);
 	var self = this;
@@ -30,7 +31,9 @@ class RabbitMQ {
 		console.log(data);
 		console.log("queue name: ", self.queueName);
 		channel.assertQueue(self.queueName, {durable: true});
-		channel.sendToQueue(self.queueName, Buffer.from(data), {persistent: true});
+		channel.sendToQueue(self.queueName,
+				    Buffer.from(JSON.stringify(data)),
+				    {persistent: true});
 	    });
 	    console.log(" [x] Sent '%s'", data);
 	});
