@@ -6,12 +6,26 @@ This the front-end service that sensors hit when they post data to
 SensApp. It is ia REST service that offers, the follwing endpoints:
 
  * POST at `/sensapp/:sensor-id`. Accept the data collected by the
-   sensors in JSON document.
+   sensors in JSON document. Here is an example of JSON payload:
+   
+		[
+			{
+				"measurement": "test",
+				"tags": {
+					"source:" "integration tests",
+				},
+				"time": "2009-11-10T23:00:00Z",
+				"fields": {
+					"value": 0.64,
+		
+				}
+			}
+		]
 
  * GET at `/sensapp/about` returns some general informations about the
    service. Useful to quickly test that the service is up and running.
 
-
+ 
 # Build, Test and Installation
 
 Receiver is a NodeJS application, so the requirements are NodeJS and
