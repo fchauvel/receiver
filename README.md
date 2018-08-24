@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fchauvel/receiver.svg?branch=master)](https://travis-ci.org/fchauvel/receiver)
+
 # SensApp::Receiver
 
 This the front-end service that sensors hit when they post data to
