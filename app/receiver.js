@@ -26,7 +26,7 @@ class Receiver {
 	this.app.use(bodyParser.urlencoded({ extended: false }));
 	this.app.use(bodyParser.json());
 	
-	this.app.post("/sensapp/:sensorId", (request, response) => {
+	this.app.post("/sensors/:sensorId/data", (request, response) => {
 	    var sensorId = request.params.sensorId
 
 	    console.log("Received: ", request.body);
@@ -35,10 +35,10 @@ class Receiver {
 	    response.set("Content-Type", "application/json");
 	    response.send(JSON.stringify(
 		{"comment": "Data will be soon available ",
-		 "url": `/sensapp/#{sensorId}`} ));
+		 "url": `/sensors/#{sensorId}/data`} ));
 	});
 
-	this.app.get("/sensapp/about", (request, response) => {
+	this.app.get("/receiver/about", (request, response) => {
 	    const About = require("./about");
 	    const infos = About.fromPackageJson();
 

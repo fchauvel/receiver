@@ -36,9 +36,9 @@ describe("Receiver", function() {
 	new FakeMessageQueue());
     
 
-    it("should accepts sensor data on POST /sensapp/my-sensor", (done) => {
+    it("should accept sensor data on POST /sensors/my-sensor/data", (done) => {
 	chai.request(receiver.app)
-	    .post('/sensapp/my-sensor')
+	    .post('/sensors/my-sensor/data')
 	    .send([{
 		"sensor": "my-sensor", 
 		"data": "my-json-data"
@@ -55,9 +55,9 @@ describe("Receiver", function() {
     });
 
     
-    it("should return infos on GET /sensapp/about", (done) => {
+    it("should return infos on GET /receiver/about", (done) => {
 	chai.request(receiver.app)
-	    .get('/sensapp/about')
+	    .get('/receiver/about')
 	    .end( (error, response) => {
 		should.not.exist(error);
 		response.should.have.status(200);
