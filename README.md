@@ -5,7 +5,7 @@
 This the front-end service that sensors hit when they post data to
 SensApp. It is ia REST service that offers, the follwing endpoints:
 
- * POST at `/sensapp/:sensor-id`. Accept the data collected by the
+ * POST at `/sensors/{sensor-id}/data`. Accept the data collected by the
    sensors in JSON document. Here is an example of JSON payload:
    
 		[
@@ -22,7 +22,7 @@ SensApp. It is ia REST service that offers, the follwing endpoints:
 			}
 		]
 
- * GET at `/sensapp/about` returns some general informations about the
+ * GET at `/receiver/about` returns some general informations about the
    service. Useful to quickly test that the service is up and running.
 
  
