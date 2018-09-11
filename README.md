@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1253b557fc7d4fa8bbb3d4255b459300)](https://app.codacy.com/app/fchauvel/receiver?utm_source=github.com&utm_medium=referral&utm_content=fchauvel/receiver&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://travis-ci.org/fchauvel/receiver.svg?branch=master)](https://travis-ci.org/fchauvel/receiver)
 [![Test Coverage](https://img.shields.io/codecov/c/github/fchauvel/receiver.svg)](https://codecov.io/gh/fchauvel/receiver)
 
