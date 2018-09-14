@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/fchauvel/receiver.svg?branch=master)](https://travis-ci.org/fchauvel/receiver)
 [![Test Coverage](https://img.shields.io/codecov/c/github/fchauvel/receiver.svg)](https://codecov.io/gh/fchauvel/receiver)
+![GitHub tag](https://img.shields.io/github/tag/fchauvel/receiver.svg)
 
 # SensApp::Receiver
 
