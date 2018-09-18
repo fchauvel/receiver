@@ -1,12 +1,22 @@
-FROM node:8.11.4-stretch
+#
+# SensApp::Receiver
+#
+# Copyright (C) 2017 SINTEF Digital
+# All rights reserved.
+#
+# This software may be modified and distributed under the terms
+# of the MIT license.  See the LICENSE file for details.
+#
+
+
+FROM node:8.11-alpine
 
 MAINTAINER "franck.chauvel@sintef.no"
 
-RUN apt-get -qq update
+WORKDIR /receiver	
+COPY . /receiver
 
 # Install SensApp::Receiver
-COPY . /receiver
-WORKDIR receiver
 RUN npm install
 
 EXPOSE 3000
